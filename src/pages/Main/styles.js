@@ -37,10 +37,16 @@ export const Form = styled.form `
     input:hover{
         border-color: #0d2636;
     }
+
+    input:focus{
+        border-color: #0d2636;
+    }
 `;
 
-export const SubmitButton = styled.button `
-    background-color: #0d2636;
+export const SubmitButton = styled.button.attrs({
+    type: 'submit'
+}) `
+    background-color: rgba(2,0,36,1);
     border: 0;
     border-radius: 4px;
     margin-left: 10px;
@@ -51,6 +57,6 @@ export const SubmitButton = styled.button `
     transition: 0.2s;
 
     &:hover{
-        opacity: 0.9;
+        rotate: 90deg;
     }
 `;
