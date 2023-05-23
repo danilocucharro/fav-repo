@@ -27,7 +27,7 @@ export const Form = styled.form `
 
     input{
         flex: 1;
-        border: 1px solid #ddd;
+        border: 1px solid ${props => (props.error ? '#ff0000' : '#ddd')};
         padding: 10px 15px;
         border-radius: 4px;
         font-size: 17px;
@@ -35,10 +35,6 @@ export const Form = styled.form `
     }
 
     input:hover{
-        border-color: #0d2636;
-    }
-
-    input:focus{
         border-color: #0d2636;
     }
 `;
@@ -68,16 +64,15 @@ export const SubmitButton = styled.button.attrs(props =>({
     align-items: center;
 
     &[disabled]{
-        cursor: not-allowed;
-        opacity: 0.5;
+      cursor: not-allowed;
+      opacity: 0.5;
     }
 
-    ${props => props.loading && 
-        css`
-          svg{
-            animation: ${animate} 2s linear infinite;
-          }
-        `
+    ${props => props.loading && css`
+      svg{
+        animation: ${animate} 2s linear infinite;
+      }
+    `
     }
 `;
 
