@@ -8,7 +8,7 @@ export default function Rotas(){
   return(
     <Routes>
       <Route exact path="/" element={<Main/>}/>
-      <Route exact path="/repositorio/:repositorio" element={<Repositorio/>}/>
+      <Route exact path="/repositorio/:repositorioParams" element={<Repositorio/>}/>
     </Routes>
   );
 }
