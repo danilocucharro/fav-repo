@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import { useParams } from 'react-router-dom'
-import { Container } from './styles'
+import { Container, Owner, Loading, BackButton } from './styles'
+import { FaArrowLeft } from 'react-icons/fa'
 
 export default function Repositorio(){
   const { repositorioParams } = useParams();
@@ -15,7 +16,7 @@ export default function Repositorio(){
     async function load(){
       const nomeRepo = decodeURIComponent(repositorioParams);
 
-      const [repositorioData, issuesData] = await Promise.all([//vai executar as duas requisição ao mesmo tempo
+      const [repositorioData, issuesData] = await Promise.all([//vai executar as duas requisições ao mesmo tempo
         api.get(`/repos/${nomeRepo}`),
         api.get(`/repos/${nomeRepo}/issues`, {
           params:{
@@ -27,16 +28,33 @@ export default function Repositorio(){
 
       setRepositorio(repositorioData.data);
       setIssues(issuesData.data);
-      console.log(repositorio)
-      console.log(issues)
+      console.log(issuesData.data)
       setLoading(false);
     }
     load();
   }, [repositorioParams]);
 
+  if(loading){
+    return(
+      <Loading>
+        <h1>Carregando...</h1>
+      </Loading>
+    )
+  }
+
   return(
     <Container>
-      
+      <BackButton to="/">
+        <FaArrowLeft color="#000" size={35}/>
+      </BackButton>
+      <Owner>
+        <img
+         src={repositorio.owner.avatar_url} 
+         alt={repositorio.owner.login} 
+        />
+        <h1>{repositorio.name}</h1>
+        <p>{repositorio.description}</p>
+      </Owner>
     </Container>
   )
 }
