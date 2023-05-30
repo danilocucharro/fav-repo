@@ -10,6 +10,7 @@ export default function Repositorio(){
   const [repositorio, setRepositorio] = useState({});
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1); 
   
   useEffect(()=> {
     
@@ -33,6 +34,28 @@ export default function Repositorio(){
     }
     load();
   }, [repositorioParams]);
+
+  useEffect(()=> {
+    async function loadIssue(){
+      const nomeRepo = decodeURIComponent(repositorioParams);
+
+      const response = await api.get(`/repos/${nomeRepo}/issues`,{
+        params:{
+          state: 'open',
+          page: page,
+          per_page: 5,
+        },
+      });
+      setIssues(response.data)
+    }
+
+    loadIssue();
+  }, [page])
+
+  function handlePage(action){
+    setPage(action === 'back' ? page - 1 : page + 1)
+    console.log(page)
+  }
 
   if(loading){
     return(
@@ -77,8 +100,22 @@ export default function Repositorio(){
       </IssuesList>
 
       <PageActions>
-        <button type="button" onClick={()=>{}}>Voltar</button>
-        <button type="button" onClick={()=>{}}>Próxima</button>
+        <button
+         type="button" 
+         onClick={()=> handlePage('back')}
+         disabled={page < 2}
+        >
+          Voltar
+        </button>
+        
+        <span>Pagina {page}</span>
+
+        <button
+         type="button"
+         onClick={()=> handlePage('next')}
+        >
+          Próxima
+        </button>
       </PageActions>
     </Container>
   )

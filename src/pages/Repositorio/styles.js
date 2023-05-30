@@ -88,10 +88,10 @@ export const IssuesList = styled.ul`
       a{
         text-decoration: none;
         color: #222;
+        transition: 0.2s all;
 
         &:hover{
           color: #0071db;
-          transition: 0.2s all;
         }
       }
 
@@ -109,5 +109,24 @@ export const IssuesList = styled.ul`
 `;
 
 export const PageActions = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
 
+  button{
+    outline: 0;
+    border: 0;
+    background-color: rgb(2,0,36);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: 0.2s all;
+    font-weight: 600;
+
+    &:disabled{
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
 `;
