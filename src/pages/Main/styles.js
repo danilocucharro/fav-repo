@@ -62,6 +62,11 @@ export const SubmitButton = styled.button.attrs(props =>({
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: all 0.2s;
+
+    &:hover{
+      opacity: 0.9;
+    }
 
     &[disabled]{
       cursor: not-allowed;

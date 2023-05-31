@@ -69,6 +69,7 @@ export const IssuesList = styled.ul`
     height: 35px;
     border-radius: 50%;
     border: 2px solid gray;
+    margin-top: 10px;
     }
 
     div{
@@ -130,3 +131,32 @@ export const PageActions = styled.div`
     }
   }
 `;
+
+export const FilterField = styled.div`
+  display: flex;
+  margin-top: 2rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  strong{
+    font-size: 1.25rem;
+    margin-right: 20px;
+  }
+  
+  button{
+    outline: 0;
+    border: 0;
+    background-color: rgb(2,0,36);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: 0.2s all;
+    font-weight: 600;
+
+    & + button{
+    margin-left: 10px;
+    }
+
+  }
+`

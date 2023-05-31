@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import { useParams } from 'react-router-dom'
-import { Container, Owner, Loading, BackButton, IssuesList, PageActions } from './styles'
+import { Container, Owner, Loading, BackButton, IssuesList, PageActions, FilterField } from './styles'
 import { FaArrowLeft } from 'react-icons/fa'
 
 export default function Repositorio(){
@@ -10,7 +10,8 @@ export default function Repositorio(){
   const [repositorio, setRepositorio] = useState({});
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1); 
+  const [page, setPage] = useState(1);
+  const [filter, setFilter] = useState('open');
   
   useEffect(()=> {
     
@@ -21,7 +22,7 @@ export default function Repositorio(){
         api.get(`/repos/${nomeRepo}`),
         api.get(`/repos/${nomeRepo}/issues`, {
           params:{
-            state: 'open',
+            state: 'all',
             per_page: 5
           }
         })
@@ -29,7 +30,6 @@ export default function Repositorio(){
 
       setRepositorio(repositorioData.data);
       setIssues(issuesData.data);
-      console.log(issuesData.data)
       setLoading(false);
     }
     load();
@@ -41,7 +41,7 @@ export default function Repositorio(){
 
       const response = await api.get(`/repos/${nomeRepo}/issues`,{
         params:{
-          state: 'open',
+          state: filter,
           page: page,
           per_page: 5,
         },
@@ -50,11 +50,10 @@ export default function Repositorio(){
     }
 
     loadIssue();
-  }, [page])
+  }, [page, filter])
 
   function handlePage(action){
     setPage(action === 'back' ? page - 1 : page + 1)
-    console.log(page)
   }
 
   if(loading){
@@ -63,6 +62,11 @@ export default function Repositorio(){
         <h1>Carregando...</h1>
       </Loading>
     )
+  }
+
+  function handleIssuesFilter(value){
+    setFilter(value)
+    setPage(1)
   }
 
   return(
@@ -79,12 +83,34 @@ export default function Repositorio(){
         <p>{repositorio.description}</p>
       </Owner>
 
+      <FilterField>
+        <strong>Filtro: </strong>
+        <button type="button"
+         onClick={()=> handleIssuesFilter('open')}
+         >
+          Em Aberto
+        </button>
+
+        <button type="button"
+         onClick={()=> handleIssuesFilter('closed')}
+         >
+          Fechado
+        </button>
+
+        <button type="button"
+         onClick={()=> handleIssuesFilter('all')}
+         >
+          Todos
+        </button>
+      </FilterField>
+
       <IssuesList>
         {issues.map(issue =>(
           <li key={String(issue.id)}>
             <img src={issue.user.avatar_url} alt={issue.user.login} />
 
             <div>
+              <p>{issue.state}</p>
               <strong>
                 <a href={issue.html_url} target="blank">{issue.title}</a>
                 {issue.labels.map(label =>(
