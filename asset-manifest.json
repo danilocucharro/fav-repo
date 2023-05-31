@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/fav-repo/static/js/main.529c8a48.js",
+    "index.html": "/fav-repo/index.html",
+    "main.529c8a48.js.map": "/fav-repo/static/js/main.529c8a48.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.529c8a48.js"
+  ]
+}
