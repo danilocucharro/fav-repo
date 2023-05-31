@@ -157,6 +157,5 @@ export const FilterField = styled.div`
     & + button{
     margin-left: 10px;
     }
-
   }
 `
