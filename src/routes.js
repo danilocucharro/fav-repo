@@ -7,6 +7,7 @@ import Repositorio from './pages/Repositorio'
 export default function Rotas(){
   return(
     <Routes>
+      <Route exact path="/fav-repo" element={<Main/>}/>
       <Route exact path="/" element={<Main/>}/>
       <Route exact path="/repositorio/:repositorioParams" element={<Repositorio/>}/>
     </Routes>
