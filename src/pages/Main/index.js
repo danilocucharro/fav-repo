@@ -71,44 +71,43 @@ export default function Main(){
     }, [repositorios])
 
     return(
-        <Container>
-            <h1>
-                <FaGithub size={25}/>
-                Meus Repositórios
-            </h1>
+      <Container>
+        <h1>
+          <FaGithub size={25} />
+          Meus Repositórios
+        </h1>
 
-            <Form onSubmit={handleSubmit} error={alert}>
-              <input
-                type="text"
-                placeholder="Adicionar Repositório"
-                value={newRepo}
-                onChange={handleInputChange}
-              />
+        <Form onSubmit={handleSubmit} error={alert}>
+          <input
+            type="text"
+            placeholder="Adicionar Repositório - exemplo: facebook/react"
+            value={newRepo}
+            onChange={handleInputChange} />
 
-              <SubmitButton loading={loading ? 1 : 0}>
-                  {loading ? (
-                      <FaSpinner color="#fff" size={14}/>
-                  ) : (
-                      <FaPlus color="#fff" size={14}/>
-                  )}
-              </SubmitButton>
-            </Form>
+          <SubmitButton loading={loading ? 1 : 0}>
+            {loading ? (
+              <FaSpinner color="#fff" size={14} />
+            ) : (
+              <FaPlus color="#fff" size={14} />
+            )}
+          </SubmitButton>
+        </Form>
 
-            <List>
-              {repositorios.map(repo => (
-                <li key={repo.name}>
-                  <span>
-                    <DeleteButton onClick={()=>handleDeleteRepo(repo.name)}>
-                      <FaTrash size={14} />
-                    </DeleteButton>
-                    {repo.name}
-                  </span>
-                  <Link to={`/repositorio/${encodeURIComponent(repo.name)}`}>
-                    <FaBars size={20} />
-                  </Link>
-                </li>
-              ))}
-            </List>
-        </Container>
+        <List>
+          {repositorios.map(repo => (
+            <li key={repo.name}>
+              <span>
+                <DeleteButton onClick={() => handleDeleteRepo(repo.name)}>
+                  <FaTrash size={14} />
+                </DeleteButton>
+                {repo.name}
+              </span>
+              <Link to={`/repositorio/${encodeURIComponent(repo.name)}`}>
+                <FaBars size={20} />
+              </Link>
+            </li>
+          ))}
+        </List>
+      </Container>
     );
 }

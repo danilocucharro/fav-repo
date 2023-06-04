@@ -71,7 +71,7 @@ export default function Repositorio(){
 
   return(
     <Container>
-      <BackButton to="/">
+      <BackButton to="/fav-repo">
         <FaArrowLeft color="#000" size={35}/>
       </BackButton>
       <Owner>
