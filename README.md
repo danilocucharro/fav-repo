@@ -12,8 +12,7 @@ informações do seu repositório favorito.
 
 ### [Link para a aplicação >](https://fav-repo.vercel.app/)
 
-##Integrantes do grupo
-
+## Integrantes do grupo
 [Pedro Mota Vieira](https://github.com/PedroKSbr)
 RA: 3022104838
 
@@ -21,4 +20,4 @@ RA: 3022104838
 RA: 3022104661
 
 [Antonio da Silva Teixeira Junior](https://github.com/tonijnr)
-RA: 
+RA: 3022103108
